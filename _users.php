@@ -4,6 +4,7 @@ $config = parse_ini_file('user_config.ini');
 //function to check if user exists
 function check_user($username, $email){
   //sanitise inputs
+  $config = parse_ini_file('user_config.ini');
   $username = db_escape_string($username);
   $email = db_escape_string($email);
   //query database to see if username or email exists
