@@ -2,16 +2,16 @@
 //database connection function
 function db_connect() {
   //define connection as static so that it only tries to connect once
-  static  $connection;
+  static $connection;
   //if there is no connection try to connect
   if(!isset($connection)){
     //load configurarion file as an array, use the actual location of the config file should be outside your document root
-    $config = parse_ini_file('../config');
+    $config = parse_ini_file('../config.ini');
     //try to connect to the database
     $connection = mysqli_connect('Localhost',$config['username'],$config['password'],$config['dbname']);
   }
   //check to see if connection was successful if not handle the error
-  if($connetion === false) {
+  if($connection === false) {
     //work out what to do if connection fails im thinking email me :)
     return mysqli_connect_error();
   }
@@ -35,7 +35,7 @@ function db_fetch_array($result){
     $rows[] = $row;
   }
   //return the array
-  return $rows;
+  return $rows[0];
 }
 //database selct function
 function db_select($query){
