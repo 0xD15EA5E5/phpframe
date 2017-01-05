@@ -6,7 +6,7 @@ function db_connect() {
   //if there is no connection try to connect
   if(!isset($connection)){
     //load configurarion file as an array, use the actual location of the config file should be outside your document root
-    $config = parse_ini_file('../config.ini');
+    $config = parse_ini_file('config.ini');
     //try to connect to the database
     $connection = mysqli_connect('Localhost',$config['username'],$config['password'],$config['dbname']);
   }
