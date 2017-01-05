@@ -3,7 +3,7 @@
 $config = parse_ini_file('user_config.ini');
 //function to check if user exists
 function check_user($username, $email){
-  gloabl $config;
+  global $config;
   //sanitise inputs
   $username = db_escape_string($username);
   $email = db_escape_string($email);
