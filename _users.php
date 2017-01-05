@@ -29,7 +29,7 @@ function register_new_user($username, $password, $email, $fname, $sname){
   $fname = db_escape_string($fname);
   $sname = db_escape_string($sname);
 
-  db_query("INSERT INTO '.$config['dbname'].'" (username, password_hash, email, fname, sname) VALUES ($username, $password, $email, $fname, $sname));
+//  db_query("INSERT INTO '.$config['dbname'].'" (username, password_hash, email, fname, sname) VALUES ($username, $password, $email, $fname, $sname));
 }
 
  ?>
