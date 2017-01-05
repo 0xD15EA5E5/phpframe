@@ -3,8 +3,8 @@
 $config = parse_ini_file('user_config.ini');
 //function to check if user exists
 function check_user($username, $email){
+  gloabl $config;
   //sanitise inputs
-  $config = parse_ini_file('user_config.ini');
   $username = db_escape_string($username);
   $email = db_escape_string($email);
   //query database to see if username or email exists
@@ -22,6 +22,7 @@ function check_user($username, $email){
 }
 //register user in database
 function register_new_user($username, $password, $email, $fname, $sname){
+  global $config;
   //sanitise inputs and hash users password
   $username = db_escape_string($username);
   $password = db_escape_string($password);
