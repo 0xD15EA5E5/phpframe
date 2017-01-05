@@ -1,6 +1,6 @@
 <?php
 //parse user configuration file
-$config = parse_ini_file('../user_config.ini');
+$config = parse_ini_file('user_config.ini');
 //function to check if user exists
 function check_user($username, $email){
   //sanitise inputs
