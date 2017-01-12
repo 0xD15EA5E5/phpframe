@@ -35,7 +35,7 @@ function db_fetch_array($result){
     $rows[] = $row;
   }
   //return the array
-  return $rows;
+  return $rows[0];
 }
 //database selct function
 function db_select($query){
