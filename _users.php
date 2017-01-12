@@ -10,11 +10,13 @@ function check_user($username, $email){
   //query database to see if username or email exists
   $row = db_query('SELECT * FROM '.$config['dbname'].' WHERE username = '.$username);
   $res = db_fetch_array($row);
-  if($row){
+  //var_dump($res);
+  if($res){
     return true;
   }
   $row = db_query('SELECT * FROM '.$config['dbname'].' WHERE email = '.$email);
-  if($row){
+  $res = db_fetch_array($row);
+  if($res){
     return true;
   }
   else {
