@@ -35,7 +35,10 @@ function db_fetch_array($result){
     $rows[] = $row;
   }
   //return the array
-  return $rows[0];
+  if(!empty($rows[0]))
+    return $rows[0];
+  else 
+    return false;
 }
 //database selct function
 function db_select($query){
