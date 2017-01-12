@@ -37,7 +37,7 @@ function register_new_user($username, $password, $email, $fname, $sname){
   //check if user is already present in the database
   $validate = check_user($username, $email);
   if(!$validate){
-    db_query("INSERT INTO '.$config['dbname'].'" (username, password_hash, email, fname, sname) VALUES ($username, $password, $email, $fname, $sname));
+    db_query('INSERT INTO '.$config['dbname'].' (username, password_hash, email, fname, sname) VALUES ($username, $password, $email, $fname, $sname)');
   }
   else {
     return false;
