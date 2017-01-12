@@ -8,11 +8,11 @@ function check_user($username, $email){
   $username = db_escape_string($username);
   $email = db_escape_string($email);
   //query database to see if username or email exists
-  $row = db_select('SELECT * FROM '.$config['dbname'].' WHERE username = '.$username);
+  $row = db_query('SELECT * FROM '.$config['dbname'].' WHERE username = '.$username);
   if($row){
     return true;
   }
-  $row = db_select('SELECT * FROM '.$config['dbname'].' WHERE email = '.$email);
+  $row = db_query('SELECT * FROM '.$config['dbname'].' WHERE email = '.$email);
   if($row){
     return true;
   }
