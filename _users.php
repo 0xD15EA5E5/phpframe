@@ -27,6 +27,8 @@ function check_user($username, $email){
 function register_new_user($username, $password, $email, $fname, $sname){
   global $config;
 
+  //check if username or email is already in the database
+  $validate = check_user($username, $email);
   //sanitise inputs and hash users password
   $username = db_escape_string($username);
   $password = db_escape_string($password);
@@ -34,10 +36,11 @@ function register_new_user($username, $password, $email, $fname, $sname){
   $email = db_escape_string($email);
   $fname = db_escape_string($fname);
   $sname = db_escape_string($sname);
-  //check if user is already present in the database
-  $validate = check_user($username, $email);
-  if(!$validate){
-    db_query('INSERT INTO '.$config['dbname'].' (username, password_hash, email, fname, sname) VALUES ($username, $password, $email, $fname, $sname)');
+  //if user is present in the database returns false if not adds user to database and returns true
+  if($validate === false){
+    $sql = 'INSERT INTO '.$config['dbname'].' (username, password, email, fname, sname) VALUES ('.$username.', \''.$password.'\', '.$email.', '.$fname.', '.$sname.')';
+    db_query($sql);
+    return true;
   }
   else {
     return false;
