@@ -46,5 +46,28 @@ function register_new_user($username, $password, $email, $fname, $sname){
     return false;
   }
 }
-
+//check entered password against a user's password in the database
+function check_pass($username, $password){
+  global $config;
+  //check if user exists
+  $validate = check_user($username, '');
+  if($validate === true){
+    //sanitise inputs and convert password to md5
+    $username = db_escape_string($username);
+    $password = db_escape_string($password);
+    $pass = md5($password);
+    $sql = 'SELECT `password` FROM '.$config['dbname'].' WHERE `username` = '.$username;
+    $res = db_query($sql);
+    $row = db_fetch_array($res);
+    if($row['password'] === $pass){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  else {
+    return false;
+  }
+}
  ?>
