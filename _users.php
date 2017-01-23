@@ -1,6 +1,17 @@
 <?php
 //parse user configuration file
 $config = parse_ini_file('user_config.ini');
+//function to encrypt passwords
+function hash_pass($password){
+  global $config;
+  if($config['encryption'] == 'md5'){
+    $password = md5($password);
+  }
+  else if($config['encryption'] == 'sha1'){
+    $password = sha1($password);
+  }
+  return $password;
+}
 //function to check if user exists
 function check_user($username, $email){
   global $config;
@@ -29,10 +40,11 @@ function register_new_user($username, $password, $email, $fname, $sname){
 
   //check if username or email is already in the database
   $validate = check_user($username, $email);
-  //sanitise inputs and hash users password
+  //sanitise inputs
   $username = db_escape_string($username);
   $password = db_escape_string($password);
-  $password = md5($password);
+  //hash password with selected algorithm
+  $password = hash_pass($password);
   $email = db_escape_string($email);
   $fname = db_escape_string($fname);
   $sname = db_escape_string($sname);
@@ -55,7 +67,7 @@ function check_pass($username, $password){
     //sanitise inputs and convert password to md5
     $username = db_escape_string($username);
     $password = db_escape_string($password);
-    $pass = md5($password);
+    $pass = hash_pass($password);
     $sql = 'SELECT `password` FROM '.$config['dbname'].' WHERE `username` = '.$username;
     $res = db_query($sql);
     $row = db_fetch_array($res);
@@ -69,5 +81,12 @@ function check_pass($username, $password){
   else {
     return false;
   }
+}
+// login function
+function user_login($username, $password){
+  //sanitise inputs and md5 password
+  $username = db_escape_string($username);
+  $password = db_escape_string($password);
+  $password = hash_pass($password);
 }
  ?>
