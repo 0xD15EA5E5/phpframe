@@ -84,6 +84,7 @@ function check_pass($username, $password){
 }
 // login function
 function user_login($username, $password){
+  global $config;
   //sanitise inputs and md5 password
   $username = db_escape_string($username);
   $password = db_escape_string($password);
