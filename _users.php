@@ -88,5 +88,8 @@ function user_login($username, $password){
   $username = db_escape_string($username);
   $password = db_escape_string($password);
   $password = hash_pass($password);
+  $sql = 'SELECT * FROM '.$config['dbname'].' WHERE username = '.$username.' AND password = '.$password;
+  return $sql;
 }
- ?>
+
+?>
