@@ -82,15 +82,23 @@ function check_pass($username, $password){
     return false;
   }
 }
-// login function
+// login function returns true or false
 function user_login($username, $password){
   global $config;
   //sanitise inputs and md5 password
   $username = db_escape_string($username);
   $password = db_escape_string($password);
   $password = hash_pass($password);
-  $sql = 'SELECT * FROM '.$config['dbname'].' WHERE username = '.$username.' AND password = '.$password;
-  return $sql;
+  //check the database to see if the user and password match up
+  $sql = 'SELECT * FROM '.$config['dbname'].' WHERE username = '.$username.' AND password = \''.$password.'\'';
+  $res = db_query($sql);
+  $row = db_fetch_array($res);
+  if($row){
+    return true;
+  }
+  else {
+    return false;
+  }
 }
 
 ?>
